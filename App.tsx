@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
+import CodecabularyTabs from "./components/CodecabularyTabs";
+import { globalStyles } from "./shared/globalStyles";
+import ArticleContextProvider from "./context/ArticleContextProvider";
 
-export default function App() {
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: globalStyles.primaryBackgroundColor,
+      }}
+    >
+      <SafeAreaView style={styles.innerContainer}>
+        <CodecabularyTabs />
+      </SafeAreaView>
     </View>
   );
 }
 
+export default () => {
+  return (
+    <ArticleContextProvider>
+      <App />
+    </ArticleContextProvider>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  innerContainer: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight,
   },
 });
