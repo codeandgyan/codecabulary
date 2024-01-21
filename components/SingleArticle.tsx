@@ -44,17 +44,40 @@ const SingleArticle = ({ item, index }: Props) => {
         style={{
           ...styles.detailsContainer,
           backgroundColor: globalStyles.secondaryBackgroundColor,
+          borderColor: "#5D5D5D",
         }}
       >
         <Text style={{ ...styles.description, color: "#CCCCCC" }}>
           {item.explanation}
         </Text>
-        <ScrollView style={styles.codesnippetContainer}>
-          <CodeSnippet
-            snippet={item.example?.snippet ?? ""}
-            language="javascript"
-          />
+
+        <ScrollView
+          style={{
+            ...styles.scrollView,
+            backgroundColor: globalStyles.ternaryBackgroundColor,
+          }}
+        >
+          <View
+            style={{
+              ...styles.codesnippetContainer,
+              backgroundColor: globalStyles.ternaryBackgroundColor,
+            }}
+          >
+            <CodeSnippet snippet={item.example?.snippet ?? ""} language="" />
+          </View>
         </ScrollView>
+        {item.example?.description && (
+          <Text
+            style={{
+              ...styles.description,
+              fontSize: 14,
+              color: "#CCCCCC",
+              marginTop: 10,
+            }}
+          >
+            {item.example.description}
+          </Text>
+        )}
         <View style={styles.codeLogoContainer}>
           <Image source={LogoImg} style={styles.codeLogo} />
         </View>
@@ -85,49 +108,51 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontStyle: "normal",
     fontWeight: "800",
-    marginTop: 30,
+    marginTop: 22,
   },
   separator: {
-    marginVertical: 8,
+    marginVertical: 4,
   },
   categoryText: {
     fontSize: 14,
     fontWeight: "400",
     textAlign: "center",
-    marginBottom: 30,
+    marginBottom: 22,
   },
   detailsContainer: {
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "flex-start",
     borderWidth: 2,
     borderRadius: 20,
-    borderColor: "#5D5D5D",
-    padding: 20,
-    height: "60%",
-  },
-  codeLogoContainer: {
-    flexDirection: "row",
-    flex: 1,
-    justifyContent: "flex-end",
-    alignSelf: "flex-end",
-    // alignItems: "flex-end",
-  },
-  codeLogo: {
-    width: 60,
-    height: 60,
+    padding: 16,
+    height: "65%",
   },
   description: {
     // fontFamily: "Menlo",
     fontSize: 14,
     fontWeight: "400",
     marginBottom: 10,
+    height: "auto",
+  },
+  scrollView: {
+    flex: 1,
   },
   codesnippetContainer: {
     paddingVertical: 8,
-    // alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
     alignContent: "center",
     maxWidth: 350,
-    height: 250,
     alignSelf: "center",
+  },
+  codeLogoContainer: {
+    flexDirection: "row",
+    height: "10%",
+    justifyContent: "flex-end",
+    alignSelf: "flex-end",
+  },
+  codeLogo: {
+    width: 60,
+    height: 60,
   },
 });

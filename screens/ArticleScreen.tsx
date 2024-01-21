@@ -1,9 +1,12 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View, LogBox } from "react-native";
 import React, { useState } from "react";
 import { globalStyles } from "../shared/globalStyles";
 import useArticleContext from "../hooks/useArticleContext";
 import Carousel from "react-native-snap-carousel";
 import SingleArticle from "../components/SingleArticle";
+
+LogBox.ignoreLogs(['Warning: ...']); //TODO: Temporarily Ignore log notification by message
+LogBox.ignoreAllLogs(); //TODO: Temporarily Ignore all log notifications
 
 const ArticleScreen = () => {
   const { articles } = useArticleContext();
@@ -19,7 +22,7 @@ const ArticleScreen = () => {
       {articles && (
         <Carousel
           layout={"stack"}
-          data={articles.slice(10, 20)}
+          data={articles.slice(0, 10)}
           sliderHeight={300}
           itemHeight={windowHeight}
           vertical={true}
