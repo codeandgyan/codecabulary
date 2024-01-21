@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignContent: "center",
-    maxWidth: 350,
+    width: "100%",
     alignSelf: "center",
   },
   codeLogoContainer: {
