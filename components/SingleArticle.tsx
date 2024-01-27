@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     textAlign: "center",
-    fontFamily: "Arial",
+    // fontFamily: "Arial",
     fontSize: 24,
     fontStyle: "normal",
     fontWeight: "800",

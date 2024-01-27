@@ -1,13 +1,18 @@
 declare type ArticleContext = {
-  articles: Article[];
+  isLoading: boolean;
+  articles: Article[] | undefined;
   index: number;
   setIndex: React.Dispatch<React.SetStateAction<number>>;
   currentId: string;
   setNextId(): void;
+  hasNextPage: boolean;
+  fetchNextPage: (
+    options?: FetchNextPageOptions
+  ) => Promise<InfiniteQueryObserverResult<TData, TError>>;
 };
 
 declare type Article = {
-  id: string;
+  _id: string;
   category: string;
   tags: string;
   title: string;
