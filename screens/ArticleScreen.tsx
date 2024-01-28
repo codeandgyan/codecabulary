@@ -50,20 +50,20 @@ const ArticleScreen = () => {
           renderItem={({ item, index }) => (
             <SingleArticle item={item} index={index} />
           )}
-          // onBeforeSnapToItem={(index) => {
-          //   if (index === articles?.length - 1 && !loading) {
-          //     setLoading(true);
-          //     setTimeout(() => {
-          //       console.log("Refresh Data ------->", index);
-          //       loadNextPage();
-          //     }, 100);
-          //   }
-          // }}
-          onSnapToItem={(index) => {
-            if (index === articles?.length - 1) {
-              loadNextPage();
+          onBeforeSnapToItem={(index) => {
+            if (index === articles?.length - 1 && !loading) {
+              setLoading(true);
+              setTimeout(() => {
+                console.log("Refresh Data ------->", index);
+                loadNextPage();
+              }, 100);
             }
           }}
+          // onSnapToItem={(index) => {
+          //   if (index === articles?.length - 1 && !loading) {
+          //     loadNextPage();
+          //   }
+          // }}
           inverted={true}
           onEndReached={() => {
             console.log("onEndReached.........>>>>>");
