@@ -4,18 +4,9 @@ import axios from "axios";
 
 function useGetArticles() {
   const fetchArticles = async (pageParam = 1) => {
-    // const agent = new https.Agent({
-    //   rejectUnauthorized: false,
-    // });
-
+    console.log(`Fetching articles for page: ${pageParam}`);
     const { data } = await axios.get<Article[]>(
-      "http://localhost:3000/articles",
-      {
-        // httpsAgent: agent,
-        params: {
-          page: pageParam,
-        },
-      }
+      `http://127.0.0.1:3000/articles?page=${pageParam}`
     );
     return data;
   };
@@ -25,12 +16,6 @@ function useGetArticles() {
     queryFn: ({ pageParam }) => fetchArticles(pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      console.log(
-        "lastPage.length",
-        lastPage.length,
-        "allPages.length ------->>>>>>>>",
-        allPages.length
-      );
       if (lastPage.length === 0) return undefined;
       return allPages.length + 1;
     },

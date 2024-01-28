@@ -1,14 +1,11 @@
 declare type ArticleContext = {
-  isLoading: boolean;
   articles: Article[] | undefined;
-  index: number;
-  setIndex: React.Dispatch<React.SetStateAction<number>>;
   currentId: string;
-  setNextId(): void;
-  hasNextPage: boolean;
-  fetchNextPage: (
-    options?: FetchNextPageOptions
-  ) => Promise<InfiniteQueryObserverResult<TData, TError>>;
+  loadNextPage(): void;
+  status: "pending" | "success" | "error";
+  isFetchingPreviousPage: boolean;
+  isFetchingNextPage: boolean;
+  setCurrentId(id: string): void;
 };
 
 declare type Article = {

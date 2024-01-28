@@ -6,28 +6,32 @@ import {
   LogBox,
   ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { globalStyles } from "../shared/globalStyles";
 import useArticleContext from "../hooks/useArticleContext";
-import Carousel from "react-native-snap-carousel";
+import Carousel, { Pagination } from "react-native-snap-carousel";
 import SingleArticle from "../components/SingleArticle";
 
 LogBox.ignoreLogs(["Warning: ..."]); //TODO: Temporarily Ignore log notification by message
 LogBox.ignoreAllLogs(); //TODO: Temporarily Ignore all log notifications
 
 const ArticleScreen = () => {
-  const { articles, isLoading, hasNextPage, fetchNextPage } =
-    useArticleContext();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const windowHeight = Dimensions.get("window").height;
-  const [showLoader, setShowLoader] = useState(isLoading);
+  const {
+    articles,
+    loadNextPage,
+    status,
+    isFetchingPreviousPage,
+    isFetchingNextPage,
+    setCurrentId,
+  } = useArticleContext();
+  const [loading, setLoading] = useState(true);
 
-  const onReachedEnd = () => {
-    if (hasNextPage && !isLoading) {
-      setShowLoader(true);
-      fetchNextPage();
-    }
-  };
+  useEffect(() => {
+    setLoading(
+      status === "pending" || isFetchingNextPage || isFetchingPreviousPage
+    );
+  }, [status, isFetchingNextPage, isFetchingNextPage]);
+  const windowHeight = Dimensions.get("window").height;
   return (
     <View
       style={{
@@ -40,40 +44,49 @@ const ArticleScreen = () => {
           keyExtractor={(article) => article._id}
           layout={"stack"}
           data={articles}
-          sliderHeight={300}
+          sliderHeight={100}
           itemHeight={windowHeight}
           vertical={true}
           renderItem={({ item, index }) => (
             <SingleArticle item={item} index={index} />
           )}
-          onSnapToItem={
-            (index) => {
-              setShowLoader(false);
-              if (index === articles?.length - 1) {
-                console.log("Refresh Data ------->", index);
-                onReachedEnd();
-              }
+          // onBeforeSnapToItem={(index) => {
+          //   if (index === articles?.length - 1 && !loading) {
+          //     setLoading(true);
+          //     setTimeout(() => {
+          //       console.log("Refresh Data ------->", index);
+          //       loadNextPage();
+          //     }, 100);
+          //   }
+          // }}
+          onSnapToItem={(index) => {
+            if (index === articles?.length - 1) {
+              loadNextPage();
             }
-            // setActiveIndex(index)
-          }
+          }}
           inverted={true}
           onEndReached={() => {
             console.log("onEndReached.........>>>>>");
-            // onReachedEnd();
+            // loadNextPage();
           }}
           onEndReachedThreshold={0.5}
         />
       )}
-      {showLoader && (
-        <View style={styles.loader}>
-          {/* <Text
+      {loading && (
+        <View
           style={{
-            color: "#000000",
-            fontSize: 24,
-            fontWeight: "400",
+            ...styles.loader,
+            backgroundColor: globalStyles.primaryBackgroundColor,
           }}
-        >{`Loading... ${isLoading}`}</Text> */}
-          <ActivityIndicator color={"#FFFFFF"} size={36} />
+        >
+          <ActivityIndicator />
+          <Text
+            style={{
+              color: globalStyles.textColor,
+              fontSize: 16,
+              fontWeight: "500",
+            }}
+          >{`Loading...`}</Text>
         </View>
       )}
     </View>
@@ -92,8 +105,6 @@ const styles = StyleSheet.create({
     height: "auto",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
-    // backgroundColor: "#181818",
-    // opacity: 0.8,
+    paddingVertical: 4,
   },
 });

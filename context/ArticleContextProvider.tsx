@@ -4,13 +4,12 @@ import useGetArticles from "../hooks/query/useGetArticles";
 
 const defaultContext: ArticleContext = {
   articles: {} as Article[],
-  index: 0,
-  setIndex: () => {},
   currentId: "",
-  setNextId: () => {},
-  isLoading: false,
-  hasNextPage: false,
-  fetchNextPage: async () => {},
+  loadNextPage: async () => {},
+  status: "pending",
+  isFetchingPreviousPage: false,
+  isFetchingNextPage: false,
+  setCurrentId: () => {},
 };
 
 export const ArticleContext = createContext(defaultContext);
@@ -20,9 +19,16 @@ type Props = {
 };
 
 const ArticleContextProvider = ({ children }: Props) => {
-  const [index, setIndex] = useState(1);
-  const { data, isLoading, refetch, hasNextPage, fetchNextPage } =
-    useGetArticles();
+  const {
+    data,
+    hasNextPage,
+    fetchNextPage,
+    status,
+    isFetchingNextPage,
+    isFetchingPreviousPage,
+  } = useGetArticles();
+
+  const [currentArticleId, setCurrentArticleId] = useState("");
 
   const articles = data?.pages?.map((page) => page).flat();
 
@@ -31,13 +37,18 @@ const ArticleContextProvider = ({ children }: Props) => {
     <ArticleContext.Provider
       value={{
         articles: articles ?? undefined,
-        index: index,
-        setIndex: setIndex,
         currentId: "test",
-        setNextId: () => {},
-        fetchNextPage: fetchNextPage,
-        hasNextPage: hasNextPage,
-        isLoading: isLoading,
+        loadNextPage: () => {
+          if (hasNextPage) {
+            fetchNextPage();
+          }
+        },
+        status: status,
+        isFetchingPreviousPage: isFetchingPreviousPage,
+        isFetchingNextPage: isFetchingNextPage,
+        setCurrentId: (id: string) => {
+          setCurrentArticleId(id);
+        },
       }}
     >
       {children}
