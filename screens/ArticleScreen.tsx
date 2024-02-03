@@ -1,16 +1,21 @@
 import {
-  Dimensions,
   StyleSheet,
-  Text,
   View,
   LogBox,
+  FlatList,
+  useWindowDimensions,
+  Animated,
   ActivityIndicator,
+  Text,
+  LayoutChangeEvent,
+  StatusBar,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { globalStyles } from "../shared/globalStyles";
 import useArticleContext from "../hooks/useArticleContext";
-import Carousel, { Pagination } from "react-native-snap-carousel";
 import SingleArticle from "../components/SingleArticle";
+import { CONFIG } from "../shared/constants";
+import HorizontalLine from "../components/HorizontalLine";
 
 LogBox.ignoreLogs(["Warning: ..."]); //TODO: Temporarily Ignore log notification by message
 LogBox.ignoreAllLogs(); //TODO: Temporarily Ignore all log notifications
@@ -25,86 +30,158 @@ const ArticleScreen = () => {
     setCurrentId,
   } = useArticleContext();
   const [loading, setLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const slidesRef = useRef<any>();
 
   useEffect(() => {
-    setLoading(
-      status === "pending" || isFetchingNextPage || isFetchingPreviousPage
-    );
+    // setLoading(
+    //   status === "pending" || isFetchingNextPage || isFetchingPreviousPage
+    // );
   }, [status, isFetchingNextPage, isFetchingNextPage]);
-  const windowHeight = Dimensions.get("window").height;
-  return (
-    <View
-      style={{
-        ...styles.carousel,
-        backgroundColor: globalStyles.secondaryBackgroundColor,
-      }}
-    >
-      {articles && (
-        <Carousel
-          keyExtractor={(article) => article._id}
-          layout={"stack"}
-          data={articles}
-          sliderHeight={100}
-          itemHeight={windowHeight}
-          vertical={true}
-          renderItem={({ item, index }) => (
-            <SingleArticle item={item} index={index} />
-          )}
-          onBeforeSnapToItem={(index) => {
-            if (index === articles?.length - 1 && !loading) {
-              setLoading(true);
-              setTimeout(() => {
-                console.log("Refresh Data ------->", index);
-                loadNextPage();
-              }, 100);
-            }
-          }}
-          // onSnapToItem={(index) => {
-          //   if (index === articles?.length - 1 && !loading) {
-          //     loadNextPage();
-          //   }
-          // }}
-          inverted={true}
-          onEndReached={() => {
-            console.log("onEndReached.........>>>>>");
-            // loadNextPage();
-          }}
-          onEndReachedThreshold={0.5}
+  const { width, height } = useWindowDimensions();
+
+  const scrollY = useRef(new Animated.Value(0)).current;
+
+  const onEndReached = () => {
+    console.log("onEndReached");
+    setLoading(true);
+    loadNextPage();
+  };
+
+  const listFooterComponent = useCallback(() => {
+    return loading ? (
+      <View
+        style={{
+          ...styles.loader,
+          backgroundColor: "#36454F",
+          opacity: 0.8,
+        }}
+      >
+        <ActivityIndicator
+          size="small"
+          style={{ opacity: 1 }}
+          color={globalStyles.textColor}
         />
-      )}
-      {loading && (
-        <View
+        <Text
           style={{
-            ...styles.loader,
-            backgroundColor: globalStyles.primaryBackgroundColor,
+            ...styles.loadingText,
+            color: globalStyles.textColor,
+            opacity: 1,
           }}
         >
-          <ActivityIndicator />
-          <Text
-            style={{
-              color: globalStyles.textColor,
-              fontSize: 16,
-              fontWeight: "500",
-            }}
-          >{`Loading...`}</Text>
-        </View>
-      )}
+          Loading...
+        </Text>
+      </View>
+    ) : (
+      <></>
+    );
+  }, []);
+
+  const articleScreenRef = useRef<View>(null);
+  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    console.log("width", width, "height", height);
+    setScreenSize({ width, height });
+  };
+
+  useEffect(() => {}, [screenSize.width, screenSize.height]);
+
+  return (
+    <View style={styles.container} onLayout={onLayout}>
+      <Animated.FlatList
+        data={articles}
+        keyExtractor={(article) => article._id}
+        showsVerticalScrollIndicator={false}
+        pagingEnabled={true}
+        // ItemSeparatorComponent={() => (
+        //   <HorizontalLine color="#FFFFFF" width={3} />
+        // )}
+        renderItem={({ item, index }) => {
+          // return <SingleArticle item={item} index={index} scrollY={scrollY} parentScreenSize={screenSize} />;
+          return (
+            <View
+              style={{
+                width: screenSize.width,
+                height: screenSize.height,
+                backgroundColor: index % 2 === 0 ? globalStyles.secondaryBackgroundColor : globalStyles.backgroundColorFour,
+              }}
+            >
+              <Text
+                style={{
+                  color: globalStyles.textColor,
+                }}
+              >
+                {`${index}: ${item.title}`}
+              </Text>
+            </View>
+          );
+        }}
+        ref={slidesRef}
+        onEndReached={onEndReached}
+        ListFooterComponent={listFooterComponent}
+      />
     </View>
   );
+
+  // return (
+  //   <View
+  //     style={{
+  //       ...styles.container,
+  //       // backgroundColor: globalStyles.primaryBackgroundColor,
+  //     }}
+  //   >
+  //     <Animated.FlatList
+  //       data={articles}
+  //       keyExtractor={(article) => article._id}
+  //       showsVerticalScrollIndicator={false}
+  //       pagingEnabled={true}
+  //       renderItem={({ item, index }) => {
+  //         return <SingleArticle item={item} index={index} scrollY={scrollY} />;
+  //       }}
+  //       // onScroll={Animated.event(
+  //       //   [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+  //       //   {
+  //       //     useNativeDriver: true,
+  //       //   }
+  //       // )}
+  //       ref={slidesRef}
+  //       onEndReached={onEndReached}
+  //       ListFooterComponent={listFooterComponent}
+  //     />
+  //   </View>
+  // );
 };
 
 export default ArticleScreen;
 
 const styles = StyleSheet.create({
-  carousel: {
+  container: {
     flex: 1,
-    // transform:[{scaleY: -1}],
-  },
-  loader: {
-    width: "100%",
-    height: "auto",
     justifyContent: "center",
     alignItems: "center",
+  },
+  page: {
+    justifyContent: "center",
+  },
+  loader: {
+    // position: "absolute",
+    flex: 1,
+    flexDirection: "row",
+    alignSelf: "center",
+    width: "auto",
+    height: "auto",
+    justifyContent: "center",
+    gap: 4,
+    alignItems: "center",
     paddingVertical: 4,
+    paddingHorizontal: 8,
+    // marginTop: -108,
+    borderRadius: 25,
+  },
+  loadingText: {
+    fontSize: 14,
+    fontWeight: "800",
   },
 });

@@ -27,7 +27,7 @@ const CodecabularyTabs = () => {
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
+      initialLayout={{ width: layout.width, height: layout.height }}
       renderTabBar={() => <TopNavigation index={index} setIndex={setIndex} />}
     />
   );

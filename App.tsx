@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
 import CodecabularyTabs from "./components/CodecabularyTabs";
 import { globalStyles } from "./shared/globalStyles";
 import ArticleContextProvider from "./context/ArticleContextProvider";
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import Constants from "expo-constants";
 
 const queryClient = new QueryClient();
 function App() {
@@ -10,12 +11,18 @@ function App() {
     <View
       style={{
         ...styles.container,
+        // backgroundColor: "#5D5D5D",
         backgroundColor: globalStyles.primaryBackgroundColor,
       }}
     >
-      <SafeAreaView style={styles.innerContainer}>
+      <View
+        style={{
+          ...styles.innerContainer,
+          marginTop: StatusBar.currentHeight ?? Constants.statusBarHeight,
+        }}
+      >
         <CodecabularyTabs />
-      </SafeAreaView>
+      </View>
     </View>
   );
 }
@@ -36,6 +43,5 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    marginTop: StatusBar.currentHeight,
   },
 });

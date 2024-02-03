@@ -1,43 +1,84 @@
 import {
+  ScrollView,
   StyleSheet,
   Text,
   View,
-  Dimensions,
+  useWindowDimensions,
   Image,
-  ScrollView,
+  StatusBar,
+  Animated,
+  Platform,
+  Dimensions,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { globalStyles } from "../shared/globalStyles";
-import HorizontalLine from "./HorizontalLine";
 import LogoImg from "../assets/codecabulary-white-transparent.png";
+import HorizontalLine from "./HorizontalLine";
 import CodeSnippet from "./CodeSnippet";
+import { CONFIG } from "../shared/constants"
 
 type Props = {
   item: Article;
   index: number;
+  scrollY: Animated.Value;
+  parentScreenSize: { width: number; height: number };
 };
 
-const SingleArticle = ({ item, index }: Props) => {
-  const windowDimensions = Dimensions.get("window");
-  const windowHeight = windowDimensions.height;
-  const windowWidth = windowDimensions.width;
+const FACTOR = 40;
+
+const SingleArticle = ({ item, index, scrollY, parentScreenSize }: Props) => {
+  // const { width, height: windowHeight } = useWindowDimensions();
+  // const screenDimensions = Dimensions.get("screen");
+  // const height = screenDimensions.height;
+  // const inputRange = [-1, 0, (height - 50) * index, (height - 50) * (index + 2)];
+
+  // const scale = scrollY.interpolate({
+  //   inputRange,
+  //   outputRange: [0, 1, 1, 1],
+  // });
+  // console.log(scale);
+
+  // const pageHeight = useMemo(() => {
+  //   // console.log(
+  //   //   "bottomNavBar",
+  //   //   height -
+  //   //     (height +
+  //   //       (StatusBar?.currentHeight ?? Constants.statusBarHeight) * 2),
+  //   //   Platform.OS
+  //   // );
+  //   if (Platform.OS === "ios") {
+  //     return (
+  //       windowHeight -
+  //       (StatusBar?.currentHeight ?? Constants.statusBarHeight) -
+  //       34 -
+  //       FACTOR
+  //     );
+  //   }
+  //   return windowHeight - FACTOR;
+  // }, [windowHeight, height, index, screenDimensions]);
+
   return (
-    <View
+    <Animated.View
       style={{
         ...styles.container,
-        height: windowHeight,
-        width: windowWidth,
         backgroundColor: globalStyles.primaryBackgroundColor,
-        // transform:[{scaleY: -1}],
+        width: parentScreenSize.width,
+        height: parentScreenSize.height,
+        // transform: [{ scale }],
       }}
     >
       <Text style={{ ...styles.titleText, color: globalStyles.textColor }}>
-        {item.title}
+        {`${index}. ${item.title}`}
       </Text>
       <View style={styles.separator}>
-        <HorizontalLine color={globalStyles.textColor} width={1} />
+        <HorizontalLine color={globalStyles.textColorSecondary} width={1} />
       </View>
-      <Text style={{ ...styles.categoryText, color: "#CCCCCC" }}>
+      <Text
+        style={{
+          ...styles.categoryText,
+          color: globalStyles.textColorSecondary,
+        }}
+      >
         {`[${item.category}]`}
       </Text>
       <View
@@ -54,25 +95,24 @@ const SingleArticle = ({ item, index }: Props) => {
         <ScrollView
           style={{
             ...styles.scrollView,
-            backgroundColor: globalStyles.ternaryBackgroundColor,
+            backgroundColor: globalStyles.backgroundColorFour,
           }}
         >
           <View
             style={{
               ...styles.codesnippetContainer,
-              backgroundColor: globalStyles.ternaryBackgroundColor,
+              backgroundColor: globalStyles.backgroundColorFour,
             }}
           >
             <CodeSnippet snippet={item.example?.snippet ?? ""} language="" />
           </View>
         </ScrollView>
+
         {item.example?.description && (
           <Text
             style={{
               ...styles.description,
-              fontSize: 14,
               color: "#CCCCCC",
-              marginTop: 10,
             }}
           >
             {item.example.description}
@@ -82,7 +122,7 @@ const SingleArticle = ({ item, index }: Props) => {
           <Image source={LogoImg} style={styles.codeLogo} />
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -91,17 +131,12 @@ export default SingleArticle;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // margin: 5,
-    padding: 12,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    // shadowColor: "#FFFFFF",
-    // shadowRadius: 1,
-    // shadowOpacity: 0.3,
-    // shadowOffset: {
-    //   height: 1,
-    //   width: 1,
-    // },
+    padding: 20,
+    // marginVertical: 20,
+    borderRadius: 16,
+
+    borderColor: "yellow",
+    borderWidth: 2,
   },
   titleText: {
     textAlign: "center",
@@ -109,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontStyle: "normal",
     fontWeight: "800",
-    marginTop: 22,
+    // marginTop: 8,
   },
   separator: {
     marginVertical: 4,
@@ -121,26 +156,28 @@ const styles = StyleSheet.create({
     marginBottom: 22,
   },
   detailsContainer: {
-    justifyContent: "space-between",
+    flex: 1,
+    justifyContent: "space-evenly",
     alignItems: "flex-start",
     borderWidth: 2,
     borderRadius: 20,
     padding: 16,
-    height: "65%",
+    gap: 20,
   },
   description: {
     // fontFamily: "Menlo",
     fontSize: 14,
     fontWeight: "400",
-    marginBottom: 10,
-    height: "auto",
+    // marginVertical: 20,
+    // marginBottom: 10,
+    // height: "auto",
   },
   scrollView: {
     flex: 1,
   },
   codesnippetContainer: {
     paddingVertical: 8,
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     alignContent: "center",
     width: "100%",

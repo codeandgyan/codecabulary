@@ -4,14 +4,22 @@ import { globalStyles } from "../shared/globalStyles";
 
 const HomeScreen = () => {
   return (
-    <View>
-      <Text style={{ ...styles, color: globalStyles.textColor }}>
-        HomeScreen
-      </Text>
+    <View style={styles.container}>
+      <Text style={{ color: globalStyles.textColor }}>HomeScreen</Text>
+      <Text style={{ color: globalStyles.textColor }}>HomeScreen</Text>
+      <Text style={{ color: globalStyles.textColor }}>HomeScreen</Text>
+      <Text style={{ color: globalStyles.textColor }}>HomeScreen</Text>
+      <Text style={{ color: globalStyles.textColor }}>HomeScreen</Text>
     </View>
   );
 };
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderColor: "blue",
+    borderWidth: 2,
+  },
+});
