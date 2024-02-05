@@ -138,7 +138,14 @@ const ArticleScreen = () => {
                   padding: 16,
                   gap: 20,
                   backgroundColor: globalStyles.color2,
-                  borderColor: "#5D5D5D",
+                  borderColor: globalStyles.color5,
+                  shadowColor: globalStyles.color1,
+                  shadowOffset: {
+                    height: 0.8,
+                    width: 0.4,
+                  },
+                  // shadowRadius: 12,
+                  shadowOpacity: 0.8,
                   zIndex: 2,
                 }}
               >
@@ -193,6 +200,8 @@ const ArticleScreen = () => {
                   style={{
                     flex: 0.6,
                     backgroundColor: globalStyles.color5,
+                    borderTopLeftRadius: 50,
+                    borderTopRightRadius: 50,
                   }}
                 ></View>
               </View>
