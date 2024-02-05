@@ -12,6 +12,7 @@ export const globalStyles = {
   color2: "#181818",
   color3: "#1e1e1e",
   color4: "#2f2f2f",
+  color5: "#595959",
   textColor: "#FFFFFF",
   textColorSecondary: "#CCCCCC",
   blueHightlight: "#007FFF",

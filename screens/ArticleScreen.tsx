@@ -180,28 +180,44 @@ const ArticleScreen = () => {
                   />
                 </View>
               </View>
-              {/* <View
+              <View
+                style={{
+                  position: "absolute",
+                  flex: 1,
+                  justifyContent: "flex-end",
+                  width: screenSize.width,
+                  height: screenSize.height,
+                }}
+              >
+                <View
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: 8,
+                    flex: 0.6,
+                    backgroundColor: globalStyles.color5,
                   }}
-                >
-                  <Text
-                    style={{
-                      color: globalStyles.blueHightlight,
-                      fontSize: 14,
-                    }}
-                  >
-                    Explore More
-                  </Text>
-                  <FontAwesome5
-                    name="external-link-alt"
-                    size={24}
-                    color={globalStyles.blueHightlight}
-                  />
-                </View> */}
+                ></View>
+              </View>
+              {/* <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 8,
+        }}
+      >
+        <Text
+          style={{
+            color: globalStyles.blueHightlight,
+            fontSize: 14,
+          }}
+        >
+          Explore More
+        </Text>
+        <FontAwesome5
+          name="external-link-alt"
+          size={24}
+          color={globalStyles.blueHightlight}
+        />
+      </View> */}
             </View>
           );
         }}
