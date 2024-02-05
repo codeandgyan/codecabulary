@@ -1,11 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import React, { Dispatch, SetStateAction } from "react";
-import { globalStyles } from "../shared/globalStyles";
-import {
-  MaterialCommunityIcons,
-  SimpleLineIcons,
-  AntDesign,
-} from "@expo/vector-icons";
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 import CodeLogoImg from "../assets/codecabulary-logo-white.png";
 
 type Props = {
@@ -16,7 +11,14 @@ type Props = {
 const TopNavigation = ({ index, setIndex }: Props) => {
   return (
     <View style={styles.container}>
+      <Feather name="menu" size={24} color={"#CCCCCC"} />
       <Image source={CodeLogoImg} style={{ resizeMode: "contain" }} />
+      <MaterialIcons
+        name="first-page"
+        size={24}
+        color={"#CCCCCC"}
+        style={{ transform: [{ rotate: "90deg" }] }}
+      />
     </View>
   );
 
@@ -24,7 +26,7 @@ const TopNavigation = ({ index, setIndex }: Props) => {
     <View
       style={{
         ...styles.container,
-        backgroundColor: globalStyles.primaryBackgroundColor,
+        backgroundColor: globalStyles.color1,
       }}
     >
       {index === 0 ? (
@@ -88,8 +90,8 @@ export default TopNavigation;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "center",
-    height: 40,
+    justifyContent: "space-between",
+    minHeight: 40,
     padding: 10,
   },
 });

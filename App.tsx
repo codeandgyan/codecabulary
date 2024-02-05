@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
+import { StyleSheet, View, StatusBar, SafeAreaView } from "react-native";
 import CodecabularyTabs from "./components/CodecabularyTabs";
 import { globalStyles } from "./shared/globalStyles";
 import ArticleContextProvider from "./context/ArticleContextProvider";
@@ -12,17 +12,17 @@ function App() {
       style={{
         ...styles.container,
         // backgroundColor: "#5D5D5D",
-        backgroundColor: globalStyles.primaryBackgroundColor,
+        backgroundColor: globalStyles.color1,
       }}
     >
-      <View
+      <SafeAreaView
         style={{
           ...styles.innerContainer,
           marginTop: StatusBar.currentHeight ?? Constants.statusBarHeight,
         }}
       >
         <CodecabularyTabs />
-      </View>
+      </SafeAreaView>
     </View>
   );
 }

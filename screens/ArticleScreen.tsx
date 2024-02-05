@@ -2,20 +2,18 @@ import {
   StyleSheet,
   View,
   LogBox,
-  FlatList,
-  useWindowDimensions,
   Animated,
   ActivityIndicator,
   Text,
   LayoutChangeEvent,
-  StatusBar,
+  Image,
 } from "react-native";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { globalStyles } from "../shared/globalStyles";
 import useArticleContext from "../hooks/useArticleContext";
-import SingleArticle from "../components/SingleArticle";
-import { CONFIG } from "../shared/constants";
-import HorizontalLine from "../components/HorizontalLine";
+import CodeImage from "../components/CodeImage";
+import LogoImg from "../assets/codecabulary-white-transparent.png";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 LogBox.ignoreLogs(["Warning: ..."]); //TODO: Temporarily Ignore log notification by message
 LogBox.ignoreAllLogs(); //TODO: Temporarily Ignore all log notifications
@@ -34,13 +32,10 @@ const ArticleScreen = () => {
   const slidesRef = useRef<any>();
 
   useEffect(() => {
-    // setLoading(
-    //   status === "pending" || isFetchingNextPage || isFetchingPreviousPage
-    // );
+    setLoading(
+      status === "pending" || isFetchingNextPage || isFetchingPreviousPage
+    );
   }, [status, isFetchingNextPage, isFetchingNextPage]);
-  const { width, height } = useWindowDimensions();
-
-  const scrollY = useRef(new Animated.Value(0)).current;
 
   const onEndReached = () => {
     console.log("onEndReached");
@@ -69,7 +64,7 @@ const ArticleScreen = () => {
             opacity: 1,
           }}
         >
-          Loading...
+          Loading more...
         </Text>
       </View>
     ) : (
@@ -95,9 +90,6 @@ const ArticleScreen = () => {
         keyExtractor={(article) => article._id}
         showsVerticalScrollIndicator={false}
         pagingEnabled={true}
-        // ItemSeparatorComponent={() => (
-        //   <HorizontalLine color="#FFFFFF" width={3} />
-        // )}
         renderItem={({ item, index }) => {
           // return <SingleArticle item={item} index={index} scrollY={scrollY} parentScreenSize={screenSize} />;
           return (
@@ -105,16 +97,111 @@ const ArticleScreen = () => {
               style={{
                 width: screenSize.width,
                 height: screenSize.height,
-                backgroundColor: index % 2 === 0 ? globalStyles.secondaryBackgroundColor : globalStyles.backgroundColorFour,
+                backgroundColor: globalStyles.color1,
+                flex: 1,
+                alignItems: "center",
+                paddingHorizontal: 12,
               }}
             >
+              <View style={{ marginTop: 24 }}>
+                <Text
+                  style={{
+                    fontSize: 24,
+                    fontWeight: "700",
+                    color: globalStyles.textColor,
+                    textAlign: "center",
+                    paddingHorizontal: 8,
+                  }}
+                >
+                  {`${item.title}`}
+                </Text>
+                {/* <HorizontalLine color={globalStyles.textColor} width={2} /> */}
+              </View>
               <Text
                 style={{
-                  color: globalStyles.textColor,
+                  fontSize: 12,
+                  color: globalStyles.textColorSecondary,
+                  marginTop: 2,
                 }}
               >
-                {`${index}: ${item.title}`}
+                {`[${item.category}]`}
               </Text>
+              <View
+                style={{
+                  flex: 1,
+                  marginVertical: 12,
+                  width: "100%",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  borderWidth: 2,
+                  borderRadius: 20,
+                  padding: 16,
+                  gap: 20,
+                  backgroundColor: globalStyles.color2,
+                  borderColor: "#5D5D5D",
+                  zIndex: 2,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: globalStyles.textColorSecondary,
+                  }}
+                >
+                  {`${item.explanation}`}
+                </Text>
+                <CodeImage
+                  id={item._id}
+                  hasSnippet={item.example?.snippet ? true : false}
+                />
+                {item.example?.description && (
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      color: globalStyles.textColorSecondary,
+                    }}
+                  >
+                    {`${item.example.description}`}
+                  </Text>
+                )}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                    alignSelf: "flex-end",
+                  }}
+                >
+                  <Image
+                    source={LogoImg}
+                    style={{
+                      width: 60,
+                      height: 60,
+                    }}
+                  />
+                </View>
+              </View>
+              {/* <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 8,
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: globalStyles.blueHightlight,
+                      fontSize: 14,
+                    }}
+                  >
+                    Explore More
+                  </Text>
+                  <FontAwesome5
+                    name="external-link-alt"
+                    size={24}
+                    color={globalStyles.blueHightlight}
+                  />
+                </View> */}
             </View>
           );
         }}
@@ -129,7 +216,7 @@ const ArticleScreen = () => {
   //   <View
   //     style={{
   //       ...styles.container,
-  //       // backgroundColor: globalStyles.primaryBackgroundColor,
+  //       // backgroundColor: globalStyles.color1,
   //     }}
   //   >
   //     <Animated.FlatList
@@ -182,6 +269,6 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 14,
-    fontWeight: "800",
+    fontWeight: "600",
   },
 });

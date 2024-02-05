@@ -61,7 +61,7 @@ const SingleArticle = ({ item, index, scrollY, parentScreenSize }: Props) => {
     <Animated.View
       style={{
         ...styles.container,
-        backgroundColor: globalStyles.primaryBackgroundColor,
+        backgroundColor: globalStyles.color1,
         width: parentScreenSize.width,
         height: parentScreenSize.height,
         // transform: [{ scale }],
@@ -84,7 +84,7 @@ const SingleArticle = ({ item, index, scrollY, parentScreenSize }: Props) => {
       <View
         style={{
           ...styles.detailsContainer,
-          backgroundColor: globalStyles.secondaryBackgroundColor,
+          backgroundColor: globalStyles.color2,
           borderColor: "#5D5D5D",
         }}
       >
@@ -95,13 +95,13 @@ const SingleArticle = ({ item, index, scrollY, parentScreenSize }: Props) => {
         <ScrollView
           style={{
             ...styles.scrollView,
-            backgroundColor: globalStyles.backgroundColorFour,
+            backgroundColor: globalStyles.color4,
           }}
         >
           <View
             style={{
               ...styles.codesnippetContainer,
-              backgroundColor: globalStyles.backgroundColorFour,
+              backgroundColor: globalStyles.color4,
             }}
           >
             <CodeSnippet snippet={item.example?.snippet ?? ""} language="" />

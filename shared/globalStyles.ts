@@ -1,16 +1,17 @@
 // export const globalStyles = {
-//   primaryBackgroundColor: "#181818",
-//   //   secondaryBackgroundColor: "#2F2F2F",
-//   secondaryBackgroundColor: "#2A2A2A",
+//   color1: "#181818",
+//   //   color2: "#2F2F2F",
+//   color2: "#2A2A2A",
 //   textColor: "#FFFFFF",
 //   textColorSecondary: "#CCCCCC",
 //   blueHightlight: "#007FFF",
 // };
 
 export const globalStyles = {
-  primaryBackgroundColor: "#050505",
-  secondaryBackgroundColor: "#181818",
-  backgroundColorFour: "#2f2f2f",
+  color1: "#050505",
+  color2: "#181818",
+  color3: "#1e1e1e",
+  color4: "#2f2f2f",
   textColor: "#FFFFFF",
   textColorSecondary: "#CCCCCC",
   blueHightlight: "#007FFF",
