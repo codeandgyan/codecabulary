@@ -85,6 +85,24 @@ const ArticleScreen = () => {
 
   return (
     <View style={styles.container} onLayout={onLayout}>
+      <View
+        style={{
+          position: "absolute",
+          flex: 1,
+          justifyContent: "flex-end",
+          width: screenSize.width,
+          height: screenSize.height,
+        }}
+      >
+        <View
+          style={{
+            flex: 0.1,
+            backgroundColor: globalStyles.highlightcolor1,
+            borderTopLeftRadius: 50,
+            borderTopRightRadius: 50,
+          }}
+        />
+      </View>
       <Animated.FlatList
         data={articles}
         keyExtractor={(article) => article._id}
@@ -97,13 +115,29 @@ const ArticleScreen = () => {
               style={{
                 width: screenSize.width,
                 height: screenSize.height,
-                backgroundColor: globalStyles.color1,
                 flex: 1,
                 alignItems: "center",
                 paddingHorizontal: 12,
               }}
             >
-              <View style={{ marginTop: 24 }}>
+              <View
+                style={{
+                  marginTop: 20,
+                  width: "100%",
+                  alignItems: "center",
+                  backgroundColor: globalStyles.color1,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  shadowColor: globalStyles.color1,
+                  shadowOffset: {
+                    height: 0.4,
+                    width: 0.8,
+                  },
+                  shadowRadius: 12,
+                  shadowOpacity: 0.6,
+                  paddingVertical: 12,
+                }}
+              >
                 <Text
                   style={{
                     fontSize: 24,
@@ -116,35 +150,35 @@ const ArticleScreen = () => {
                   {`${item.title}`}
                 </Text>
                 {/* <HorizontalLine color={globalStyles.textColor} width={2} /> */}
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: globalStyles.textColorSecondary,
+                    marginTop: 2,
+                  }}
+                >
+                  {`[${item.category}]`}
+                </Text>
               </View>
-              <Text
-                style={{
-                  fontSize: 12,
-                  color: globalStyles.textColorSecondary,
-                  marginTop: 2,
-                }}
-              >
-                {`[${item.category}]`}
-              </Text>
               <View
                 style={{
                   flex: 1,
-                  marginVertical: 12,
+                  marginBottom: 12,
                   width: "100%",
                   justifyContent: "space-between",
                   alignItems: "flex-start",
-                  borderWidth: 2,
-                  borderRadius: 20,
+                  // borderWidth: 1,
+                  borderBottomLeftRadius: 20,
+                  borderBottomRightRadius: 20,
                   padding: 16,
                   gap: 20,
                   backgroundColor: globalStyles.color2,
-                  borderColor: globalStyles.color5,
                   shadowColor: globalStyles.color1,
                   shadowOffset: {
                     height: 0.8,
                     width: 0.4,
                   },
-                  // shadowRadius: 12,
+                  shadowRadius: 8,
                   shadowOpacity: 0.8,
                   zIndex: 2,
                 }}
@@ -187,46 +221,6 @@ const ArticleScreen = () => {
                   />
                 </View>
               </View>
-              <View
-                style={{
-                  position: "absolute",
-                  flex: 1,
-                  justifyContent: "flex-end",
-                  width: screenSize.width,
-                  height: screenSize.height,
-                }}
-              >
-                <View
-                  style={{
-                    flex: 0.6,
-                    backgroundColor: globalStyles.color5,
-                    borderTopLeftRadius: 50,
-                    borderTopRightRadius: 50,
-                  }}
-                ></View>
-              </View>
-              {/* <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 8,
-        }}
-      >
-        <Text
-          style={{
-            color: globalStyles.blueHightlight,
-            fontSize: 14,
-          }}
-        >
-          Explore More
-        </Text>
-        <FontAwesome5
-          name="external-link-alt"
-          size={24}
-          color={globalStyles.blueHightlight}
-        />
-      </View> */}
             </View>
           );
         }}
@@ -273,6 +267,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: globalStyles.color4,
   },
   page: {
     justifyContent: "center",

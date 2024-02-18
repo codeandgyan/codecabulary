@@ -1,10 +1,6 @@
-import {
-  StyleSheet,
-  View,
-  Image,
-  useWindowDimensions,
-} from "react-native";
-import React, {  } from "react";
+import { StyleSheet, View, Image, useWindowDimensions } from "react-native";
+import React from "react";
+import { globalStyles } from "../shared/globalStyles";
 
 type Props = {
   id: string;
@@ -18,7 +14,8 @@ const CodeImage = ({ id, hasSnippet }: Props) => {
     <View
       style={{
         width: "100%",
-        backgroundColor: "#9EAAB4",
+        backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
+        padding: 8,
         // borderColor: "yellow",
         // borderWidth: 1,
       }}
@@ -27,7 +24,7 @@ const CodeImage = ({ id, hasSnippet }: Props) => {
         source={{ uri: `http://192.168.29.59:3131/${id}.png` }}
         style={{
           resizeMode: "contain",
-          backgroundColor: "#9EAAB4",
+          backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
           // width: "100%",
           minHeight: 250,
           maxHeight: 450,

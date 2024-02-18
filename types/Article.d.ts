@@ -8,6 +8,11 @@ declare type ArticleContext = {
   setCurrentId(id: string): void;
 };
 
+declare type ArticleResponse = {
+  articleCount: number;
+  articles: Article[];
+};
+
 declare type Article = {
   _id: string;
   category: string;

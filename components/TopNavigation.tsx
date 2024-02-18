@@ -2,6 +2,7 @@ import { StyleSheet, View, Image } from "react-native";
 import React, { Dispatch, SetStateAction } from "react";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import CodeLogoImg from "../assets/codecabulary-logo-white.png";
+import { globalStyles } from "../shared/globalStyles";
 
 type Props = {
   index: number;
@@ -11,12 +12,12 @@ type Props = {
 const TopNavigation = ({ index, setIndex }: Props) => {
   return (
     <View style={styles.container}>
-      <Feather name="menu" size={24} color={"#CCCCCC"} />
+      <Feather name="menu" size={24} color={globalStyles.textColorSecondary} />
       <Image source={CodeLogoImg} style={{ resizeMode: "contain" }} />
       <MaterialIcons
         name="first-page"
         size={24}
-        color={"#CCCCCC"}
+        color={globalStyles.textColorSecondary}
         style={{ transform: [{ rotate: "90deg" }] }}
       />
     </View>

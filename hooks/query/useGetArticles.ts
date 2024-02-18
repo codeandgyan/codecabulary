@@ -6,10 +6,10 @@ import { CONFIG } from "../../shared/constants";
 function useGetArticles() {
   const fetchArticles = async (pageParam = 1) => {
     console.log(`Fetching articles for page: ${pageParam}`);
-    const { data } = await axios.get<Article[]>(
+    const { data } = await axios.get<ArticleResponse>(
       `http://192.168.29.59:3000/articles?page=${pageParam}&&limit=${CONFIG.ITEMS_LIMIT_PER_PAGE}`
     );
-    return data;
+    return data.articles;
   };
 
   return useInfiniteQuery({
