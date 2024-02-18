@@ -16,8 +16,6 @@ const CodeImage = ({ id, hasSnippet }: Props) => {
         width: "100%",
         backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
         padding: 8,
-        // borderColor: "yellow",
-        // borderWidth: 1,
       }}
     >
       <Image
@@ -25,9 +23,10 @@ const CodeImage = ({ id, hasSnippet }: Props) => {
         style={{
           resizeMode: "contain",
           backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
-          // width: "100%",
+          width: "100%",
+          height: "auto",
           minHeight: 250,
-          maxHeight: 450,
+          // maxHeight: 450,
           borderRadius: 4,
         }}
       />

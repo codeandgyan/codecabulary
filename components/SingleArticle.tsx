@@ -95,13 +95,13 @@ const SingleArticle = ({ item, index, scrollY, parentScreenSize }: Props) => {
         <ScrollView
           style={{
             ...styles.scrollView,
-            backgroundColor: globalStyles.color4,
+            backgroundColor: globalStyles.color6,
           }}
         >
           <View
             style={{
               ...styles.codesnippetContainer,
-              backgroundColor: globalStyles.color4,
+              backgroundColor: globalStyles.color6,
             }}
           >
             <CodeSnippet snippet={item.example?.snippet ?? ""} language="" />

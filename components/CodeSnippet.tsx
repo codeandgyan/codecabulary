@@ -15,7 +15,7 @@ export default function CodeSnippet({ snippet, language }: Props) {
       hljsStyle={a11yDark}
       containerStyle={{
         ...styles.codeContainer,
-        backgroundColor: globalStyles.color4,
+        backgroundColor: globalStyles.color6,
       }}
       textStyle={styles.text}
       language={language}
