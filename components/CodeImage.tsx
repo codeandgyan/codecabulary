@@ -4,11 +4,11 @@ import { globalStyles } from "../shared/globalStyles";
 
 type Props = {
   id: string;
-  hasSnippet: boolean;
+  snippet?: string;
 };
 
-const CodeImage = ({ id, hasSnippet }: Props) => {
-  const { width } = useWindowDimensions();
+const CodeImage = ({ id, snippet }: Props) => {
+  const hasSnippet = snippet ? true : false;
 
   return hasSnippet ? (
     <View
@@ -26,7 +26,7 @@ const CodeImage = ({ id, hasSnippet }: Props) => {
           width: "100%",
           height: "auto",
           minHeight: 250,
-          // maxHeight: 450,
+          maxHeight: 450,
           borderRadius: 4,
         }}
       />

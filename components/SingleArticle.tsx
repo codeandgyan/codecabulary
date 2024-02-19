@@ -1,128 +1,61 @@
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  useWindowDimensions,
-  Image,
-  StatusBar,
-  Animated,
-  Platform,
-  Dimensions,
-} from "react-native";
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+import React from "react";
+import CodingArticle from "./Articles/CodingArticle";
 import { globalStyles } from "../shared/globalStyles";
 import LogoImg from "../assets/codecabulary-white-transparent.png";
-import HorizontalLine from "./HorizontalLine";
-import CodeSnippet from "./CodeSnippet";
-import { CONFIG } from "../shared/constants"
 
 type Props = {
-  item: Article;
-  index: number;
-  scrollY: Animated.Value;
-  parentScreenSize: { width: number; height: number };
+  article: Article;
+  screenSize: { width: number; height: number };
 };
 
-const FACTOR = 40;
-
-const SingleArticle = ({ item, index, scrollY, parentScreenSize }: Props) => {
-  // const { width, height: windowHeight } = useWindowDimensions();
-  // const screenDimensions = Dimensions.get("screen");
-  // const height = screenDimensions.height;
-  // const inputRange = [-1, 0, (height - 50) * index, (height - 50) * (index + 2)];
-
-  // const scale = scrollY.interpolate({
-  //   inputRange,
-  //   outputRange: [0, 1, 1, 1],
-  // });
-  // console.log(scale);
-
-  // const pageHeight = useMemo(() => {
-  //   // console.log(
-  //   //   "bottomNavBar",
-  //   //   height -
-  //   //     (height +
-  //   //       (StatusBar?.currentHeight ?? Constants.statusBarHeight) * 2),
-  //   //   Platform.OS
-  //   // );
-  //   if (Platform.OS === "ios") {
-  //     return (
-  //       windowHeight -
-  //       (StatusBar?.currentHeight ?? Constants.statusBarHeight) -
-  //       34 -
-  //       FACTOR
-  //     );
-  //   }
-  //   return windowHeight - FACTOR;
-  // }, [windowHeight, height, index, screenDimensions]);
-
+const SingleArticle = ({ article, screenSize }: Props) => {
   return (
-    <Animated.View
+    <View
       style={{
         ...styles.container,
-        backgroundColor: globalStyles.color1,
-        width: parentScreenSize.width,
-        height: parentScreenSize.height,
-        // transform: [{ scale }],
+        width: screenSize.width,
+        height: screenSize.height,
       }}
     >
-      <Text style={{ ...styles.titleText, color: globalStyles.textColor }}>
-        {`${index}. ${item.title}`}
-      </Text>
-      <View style={styles.separator}>
-        <HorizontalLine color={globalStyles.textColorSecondary} width={1} />
-      </View>
-      <Text
-        style={{
-          ...styles.categoryText,
-          color: globalStyles.textColorSecondary,
-        }}
-      >
-        {`[${item.category}]`}
-      </Text>
       <View
         style={{
-          ...styles.detailsContainer,
-          backgroundColor: globalStyles.color2,
-          borderColor: "#5D5D5D",
+          ...styles.headlineContainer,
+          backgroundColor: globalStyles.color1,
+          shadowColor: globalStyles.color1,
         }}
       >
-        <Text style={{ ...styles.description, color: "#CCCCCC" }}>
-          {item.explanation}
-        </Text>
-
-        <ScrollView
+        <Text
           style={{
-            ...styles.scrollView,
-            backgroundColor: globalStyles.color6,
+            ...styles.titleText,
+            color: globalStyles.textColor,
           }}
         >
-          <View
-            style={{
-              ...styles.codesnippetContainer,
-              backgroundColor: globalStyles.color6,
-            }}
-          >
-            <CodeSnippet snippet={item.example?.snippet ?? ""} language="" />
-          </View>
-        </ScrollView>
-
-        {item.example?.description && (
-          <Text
-            style={{
-              ...styles.description,
-              color: "#CCCCCC",
-            }}
-          >
-            {item.example.description}
-          </Text>
-        )}
-        <View style={styles.codeLogoContainer}>
-          <Image source={LogoImg} style={styles.codeLogo} />
+          {`${article.title}`}
+        </Text>
+        {/* <HorizontalLine color={globalStyles.textColor} width={2} /> */}
+        <Text
+          style={{
+            ...styles.categoryText,
+            color: globalStyles.textColorSecondary,
+          }}
+        >
+          {`[${article.category}]`}
+        </Text>
+      </View>
+      <View
+        style={{
+          ...styles.bodyContainer,
+          backgroundColor: globalStyles.color2,
+          shadowColor: globalStyles.color1,
+        }}
+      >
+        <CodingArticle article={article} />
+        <View style={styles.logoImageContainer}>
+          <Image source={LogoImg} style={styles.logoImage} />
         </View>
       </View>
-    </Animated.View>
+    </View>
   );
 };
 
@@ -130,67 +63,64 @@ export default SingleArticle;
 
 const styles = StyleSheet.create({
   container: {
+    position: "relative",
     flex: 1,
-    padding: 20,
-    // marginVertical: 20,
-    borderRadius: 16,
-
-    borderColor: "yellow",
-    borderWidth: 2,
+    alignItems: "center",
+    paddingHorizontal: 12,
+  },
+  headlineContainer: {
+    marginTop: 20,
+    width: "100%",
+    alignItems: "center",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    shadowOffset: {
+      height: 0.4,
+      width: 0.8,
+    },
+    shadowRadius: 12,
+    shadowOpacity: 0.6,
+    paddingVertical: 12,
   },
   titleText: {
-    textAlign: "center",
-    // fontFamily: "Arial",
     fontSize: 24,
-    fontStyle: "normal",
-    fontWeight: "800",
-    // marginTop: 8,
-  },
-  separator: {
-    marginVertical: 4,
+    fontWeight: "700",
+    textAlign: "center",
+    paddingHorizontal: 8,
   },
   categoryText: {
-    fontSize: 14,
-    fontWeight: "400",
-    textAlign: "center",
-    marginBottom: 22,
+    fontSize: 12,
+    marginTop: 2,
   },
-  detailsContainer: {
+  bodyContainer: {
+    // position: "relative",
     flex: 1,
-    justifyContent: "space-evenly",
-    alignItems: "flex-start",
-    borderWidth: 2,
-    borderRadius: 20,
-    padding: 16,
-    gap: 20,
-  },
-  description: {
-    // fontFamily: "Menlo",
-    fontSize: 14,
-    fontWeight: "400",
-    // marginVertical: 20,
-    // marginBottom: 10,
-    // height: "auto",
-  },
-  scrollView: {
-    flex: 1,
-  },
-  codesnippetContainer: {
-    paddingVertical: 8,
-    // flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
+    marginBottom: 12,
     width: "100%",
-    alignSelf: "center",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    padding: 16,
+    gap: 16,
+    shadowOffset: {
+      height: 0.8,
+      width: 0.4,
+    },
+    shadowRadius: 8,
+    shadowOpacity: 0.8,
+    zIndex: 2,
   },
-  codeLogoContainer: {
-    flexDirection: "row",
-    height: "10%",
+  logoImageContainer: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
     justifyContent: "flex-end",
-    alignSelf: "flex-end",
+    alignItems: "flex-end",
+    alignSelf: "center",
+    bottom: -1,
+    right: -1,
   },
-  codeLogo: {
-    width: 60,
-    height: 60,
+  logoImage: {
+    width: 80,
+    height: 80,
   },
 });

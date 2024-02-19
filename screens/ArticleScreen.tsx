@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { globalStyles } from "../shared/globalStyles";
 import useArticleContext from "../hooks/useArticleContext";
-import SingleTopic from "../components/SingleTopic";
+import SingleArticle from "../components/SingleArticle";
 
 LogBox.ignoreLogs(["Warning: ..."]); //TODO: Temporarily Ignore log notification by message
 LogBox.ignoreAllLogs(); //TODO: Temporarily Ignore all log notifications
@@ -81,7 +81,10 @@ const ArticleScreen = () => {
   useEffect(() => {}, [screenSize.width, screenSize.height]);
 
   return (
-    <View style={styles.container} onLayout={onLayout}>
+    <View
+      style={{ ...styles.container, backgroundColor: globalStyles.color6 }}
+      onLayout={onLayout}
+    >
       {/* <View
         style={{
           position: "absolute",
@@ -107,7 +110,7 @@ const ArticleScreen = () => {
         pagingEnabled={true}
         renderItem={({ item, index }) => {
           // return <SingleArticle item={item} index={index} scrollY={scrollY} parentScreenSize={screenSize} />;
-          return <SingleTopic article={item} screenSize={screenSize} />;
+          return <SingleArticle article={item} screenSize={screenSize} />;
         }}
         ref={slidesRef}
         onEndReached={onEndReached}
@@ -152,7 +155,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: globalStyles.color6,
   },
   page: {
     justifyContent: "center",
