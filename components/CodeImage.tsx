@@ -15,6 +15,7 @@ const CodeImage = ({ id, snippet }: Props) => {
       style={{
         width: "100%",
         backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
+        borderRadius: 2,
         padding: 8,
       }}
     >

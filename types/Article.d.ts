@@ -20,9 +20,16 @@ declare type Article = {
   title: string;
   explanation: string;
   example: Example;
+  description: string;
+  analogies: Analogy;
 };
 
 declare type Example = {
   snippet: string;
   description: string;
+};
+
+declare type Analogy = {
+  para1: string;
+  para2: string;
 };

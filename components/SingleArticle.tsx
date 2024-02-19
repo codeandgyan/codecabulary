@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import React from "react";
+import React, { useCallback } from "react";
 import CodingArticle from "./Articles/CodingArticle";
 import { globalStyles } from "../shared/globalStyles";
 import LogoImg from "../assets/codecabulary-white-transparent.png";
+import AnalogyArticle from "./Articles/AnalogyArticle";
 
 type Props = {
   article: Article;
@@ -10,6 +11,10 @@ type Props = {
 };
 
 const SingleArticle = ({ article, screenSize }: Props) => {
+  const renderArticleBody = useCallback((article: Article) => {
+    if (article.example) return <CodingArticle article={article} />;
+    if (article.analogies) return <AnalogyArticle article={article} />;
+  }, []);
   return (
     <View
       style={{
@@ -50,7 +55,7 @@ const SingleArticle = ({ article, screenSize }: Props) => {
           shadowColor: globalStyles.color1,
         }}
       >
-        <CodingArticle article={article} />
+        <>{renderArticleBody(article)}</>
         <View style={styles.logoImageContainer}>
           <Image source={LogoImg} style={styles.logoImage} />
         </View>
