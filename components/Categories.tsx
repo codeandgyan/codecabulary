@@ -22,6 +22,7 @@ declare type Category = {
 const categories: Category[] = [
   { image: CodingTermsIcon, name: "Coding Terms" },
   { image: TrendingIcon, name: "Trending" },
+  { image: DifferencesIcon, name: "Cheatsheets" },
   { image: HowToIcon, name: "How to..." },
   { image: DifferencesIcon, name: "Differences" },
   { image: DifferencesIcon, name: "Analogies" },
