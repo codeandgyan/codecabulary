@@ -17,5 +17,6 @@ export const globalStyles = {
   highlightcolor1: "#38B6FF", //"#bdbdbd",
   textColor: "#FFFFFF",
   textColorSecondary: "#CCCCCC",
+  textPlaceHolder: "#979797",
   blueHightlight: "#007FFF",
 };

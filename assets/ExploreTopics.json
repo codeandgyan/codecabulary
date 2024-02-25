@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "topic": "JavaScript",
+      "definition": "High-level language for web development, creating interactive effects, dynamic content, and user interfaces.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+    },
+    {
+      "topic": "ReactJS",
+      "definition": "JavaScript library for building reusable UI components, ensuring efficient and maintainable web applications.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1150px-React-icon.svg.png"
+    },
+    {
+      "topic": "TypeScript",
+      "definition": "JavaScript superset adding static typing, enhancing code maintainability and scalability.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png"
+    },
+    {
+      "topic": "NodeJS",
+      "definition": "JavaScript runtime for building scalable network applications like web servers and APIs.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/640px-Node.js_logo.svg.png"
+    },
+    {
+      "topic": "Angular",
+      "definition": "Framework for building single-page client applications with HTML and TypeScript.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/5/50/Angular-logo.png"
+    },
+    {
+      "topic": ".NET",
+      "definition": "Framework for building web, desktop, and mobile applications.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Microsoft_.NET_logo.svg/480px-Microsoft_.NET_logo.svg.png"
+    },
+    {
+      "topic": "C#",
+      "definition": "Object-oriented language used with .NET for building Windows apps, web services, etc.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png"
+    },
+    {
+      "topic": "Java",
+      "definition": "General-purpose language known for portability, security, widely used for enterprise applications.",
+      "logo": "https://logoeps.com/wp-content/uploads/2013/03/java-eps-vector-logo.png"
+    },
+    {
+      "topic": "HTML",
+      "definition": "Markup language defining web page structure and content using tags.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/HTML5_Badge.svg/512px-HTML5_Badge.svg.png"
+    },
+    {
+      "topic": "CSS",
+      "definition": "Style sheet language defining web page presentation and layout.",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/480px-CSS3_logo.svg.png"
+    }
+  ]
+}

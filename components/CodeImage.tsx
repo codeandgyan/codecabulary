@@ -11,25 +11,11 @@ const CodeImage = ({ id, snippet }: Props) => {
   const hasSnippet = snippet ? true : false;
 
   return hasSnippet ? (
-    <View
-      style={{
-        width: "100%",
-        backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
-        borderRadius: 2,
-        padding: 8,
-      }}
-    >
+    <View style={styles.container}>
       <Image
         source={{ uri: `http://192.168.29.59:3131/${id}.png` }}
-        style={{
-          resizeMode: "contain",
-          backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
-          width: "100%",
-          height: "auto",
-          minHeight: 250,
-          maxHeight: 450,
-          borderRadius: 4,
-        }}
+        // source={{ uri: `http://192.168.1.8:3131/${id}.png` }}
+        style={styles.codeImage}
       />
     </View>
   ) : (
@@ -39,4 +25,20 @@ const CodeImage = ({ id, snippet }: Props) => {
 
 export default CodeImage;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
+    borderRadius: 2,
+    padding: 8,
+  },
+  codeImage: {
+    resizeMode: "contain",
+    backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
+    width: "100%",
+    height: "auto",
+    minHeight: 250,
+    maxHeight: 450,
+    borderRadius: 4,
+  },
+});
