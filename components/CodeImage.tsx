@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   },
   codeImage: {
     resizeMode: "stretch",
-    
     backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
     // width: "100%",
     height: 250,

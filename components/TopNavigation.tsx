@@ -13,7 +13,14 @@ const TopNavigation = ({ index, setIndex }: Props) => {
   return (
     <View style={styles.container}>
       <Feather name="menu" size={24} color={globalStyles.textColorSecondary} />
-      <Image source={CodeLogoImg} style={{ resizeMode: "contain" }} />
+      <Image
+        source={CodeLogoImg}
+        style={{
+          resizeMode: "contain",
+          width: 135.28,
+          height: 29.26,
+        }}
+      />
       <MaterialIcons
         name="first-page"
         size={24}

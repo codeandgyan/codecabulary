@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React, { useCallback } from "react";
-import CodingArticle from "./Articles/CodingArticle";
-import { globalStyles } from "../shared/globalStyles";
-import LogoImg from "../assets/codecabulary-white-transparent.png";
-import AnalogyArticle from "./Articles/AnalogyArticle";
+import CodingArticle from "./CodingArticle";
+import { globalStyles } from "../../shared/globalStyles";
+import AnalogyArticle from "./AnalogyArticle";
 
 type Props = {
   article: Article;
@@ -56,9 +55,6 @@ const SingleArticle = ({ article, screenSize }: Props) => {
         }}
       >
         <>{renderArticleBody(article)}</>
-        <View style={styles.logoImageContainer}>
-          <Image source={LogoImg} style={styles.logoImage} />
-        </View>
       </View>
     </View>
   );
@@ -113,19 +109,5 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOpacity: 0.8,
     zIndex: 2,
-  },
-  logoImageContainer: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-    alignSelf: "center",
-    bottom: -1,
-    right: -1,
-  },
-  logoImage: {
-    width: 80,
-    height: 80,
   },
 });

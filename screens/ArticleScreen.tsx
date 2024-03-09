@@ -6,11 +6,14 @@ import {
   ActivityIndicator,
   Text,
   LayoutChangeEvent,
+  Image,
 } from "react-native";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { globalStyles } from "../shared/globalStyles";
 import useArticleContext from "../hooks/useArticleContext";
-import SingleArticle from "../components/SingleArticle";
+import SingleArticle from "../components/Articles/SingleArticle";
+import Top10Article from "../components/Articles/Top10Article";
+import LogoImg from "../assets/codecabulary-white-transparent.png";
 
 LogBox.ignoreLogs(["Warning: ..."]); //TODO: Temporarily Ignore log notification by message
 LogBox.ignoreAllLogs(); //TODO: Temporarily Ignore all log notifications
@@ -106,7 +109,7 @@ const ArticleScreen = () => {
 
   return (
     <View
-      style={{ ...styles.container, backgroundColor: globalStyles.color6 }}
+      style={{ ...styles.container }} //, backgroundColor: globalStyles.color6 }}
       onLayout={onLayout}
     >
       {/* <View
@@ -134,12 +137,16 @@ const ArticleScreen = () => {
         pagingEnabled={true}
         renderItem={({ item, index }) => {
           // return <SingleArticle item={item} index={index} scrollY={scrollY} parentScreenSize={screenSize} />;
-          return <SingleArticle article={item} screenSize={screenSize} />;
+          // return <SingleArticle article={item} screenSize={screenSize} />;
+          return <Top10Article article={item} screenSize={screenSize} />;
         }}
         ref={slidesRef}
         onEndReached={onEndReached}
         ListFooterComponent={listFooterComponent}
       />
+      <View style={styles.logoImgContainer}>
+        <Image source={LogoImg} style={styles.logoImage} />
+      </View>
     </View>
   );
 
@@ -176,15 +183,13 @@ export default ArticleScreen;
 
 const styles = StyleSheet.create({
   container: {
+    position: "relative",
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   page: {
     justifyContent: "center",
   },
   loader: {
-    // position: "absolute",
     flex: 1,
     flexDirection: "row",
     alignSelf: "center",
@@ -195,11 +200,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 4,
     paddingHorizontal: 8,
-    // marginTop: -108,
     borderRadius: 25,
   },
   loadingText: {
     fontSize: 14,
     fontWeight: "600",
+  },
+  logoImgContainer: {
+    flex: 1,
+    position: "absolute",
+    bottom: 0,
+    right: 10,
+  },
+  logoImage: {
+    width: 80,
+    height: 80,
   },
 });

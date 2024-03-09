@@ -33,3 +33,9 @@ declare type Analogy = {
   para1: string;
   para2: string;
 };
+
+declare type CarouselBody = {
+  page: number;
+  title: string;
+  description: string;
+};
