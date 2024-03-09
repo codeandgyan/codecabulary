@@ -32,20 +32,20 @@ const SingleArticle = ({ article, screenSize }: Props) => {
       >
         <Text
           style={{
-            ...styles.titleText,
+            ...styles.conceptText,
             color: globalStyles.textColor,
           }}
         >
-          {`${article.title}`}
+          {`${article.concept}`}
         </Text>
         {/* <HorizontalLine color={globalStyles.textColor} width={2} /> */}
         <Text
           style={{
-            ...styles.categoryText,
+            ...styles.topicText,
             color: globalStyles.textColorSecondary,
           }}
         >
-          {`[${article.category}]`}
+          {`[${article.topic}]`}
         </Text>
       </View>
       <View
@@ -87,13 +87,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.6,
     paddingVertical: 12,
   },
-  titleText: {
+  conceptText: {
     fontSize: 24,
     fontWeight: "700",
     textAlign: "center",
     paddingHorizontal: 8,
   },
-  categoryText: {
+  topicText: {
     fontSize: 12,
     marginTop: 2,
   },

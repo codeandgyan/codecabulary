@@ -15,9 +15,9 @@ declare type ArticleResponse = {
 
 declare type Article = {
   _id: string;
-  category: string;
+  topic: string;
   tags: string;
-  title: string;
+  concept: string;
   explanation: string;
   example: Example;
   description: string;

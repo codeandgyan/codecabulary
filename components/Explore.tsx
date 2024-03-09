@@ -22,8 +22,8 @@ const Explore = () => {
   console.log(TOPICS.data);
   return (
     <View style={styles.exploreContainer}>
-      <View style={styles.title}>
-        <Text style={{ ...styles.titleText, color: globalStyles.textColor }}>
+      <View style={styles.concept}>
+        <Text style={{ ...styles.conceptText, color: globalStyles.textColor }}>
           Topics to explore
         </Text>
         <Image source={LogoImg} style={styles.logoImage} />
@@ -102,11 +102,11 @@ const styles = StyleSheet.create({
     // width: "100%",
     flex: 1,
   },
-  title: {
+  concept: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  titleText: {
+  conceptText: {
     fontSize: 24,
     fontWeight: "600",
     alignSelf: "center",

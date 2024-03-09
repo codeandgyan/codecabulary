@@ -15,7 +15,7 @@ import { globalStyles } from "../shared/globalStyles";
 import LogoImg from "../assets/codecabulary-white-transparent.png";
 import HorizontalLine from "./HorizontalLine";
 import CodeSnippet from "./CodeSnippet";
-import { CONFIG } from "../shared/constants"
+import { CONFIG } from "../shared/constants";
 
 type Props = {
   item: Article;
@@ -67,19 +67,19 @@ const ArticleOld = ({ item, index, scrollY, parentScreenSize }: Props) => {
         // transform: [{ scale }],
       }}
     >
-      <Text style={{ ...styles.titleText, color: globalStyles.textColor }}>
-        {`${index}. ${item.title}`}
+      <Text style={{ ...styles.conceptText, color: globalStyles.textColor }}>
+        {`${index}. ${item.concept}`}
       </Text>
       <View style={styles.separator}>
         <HorizontalLine color={globalStyles.textColorSecondary} width={1} />
       </View>
       <Text
         style={{
-          ...styles.categoryText,
+          ...styles.topicText,
           color: globalStyles.textColorSecondary,
         }}
       >
-        {`[${item.category}]`}
+        {`[${item.topic}]`}
       </Text>
       <View
         style={{
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     borderColor: "yellow",
     borderWidth: 2,
   },
-  titleText: {
+  conceptText: {
     textAlign: "center",
     // fontFamily: "Arial",
     fontSize: 24,
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   separator: {
     marginVertical: 4,
   },
-  categoryText: {
+  topicText: {
     fontSize: 14,
     fontWeight: "400",
     textAlign: "center",

@@ -27,18 +27,18 @@ export default CodeImage;
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    // width: "100%",
+    // height: "auto",
     backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
     borderRadius: 2,
-    padding: 8,
+    padding: 12,
   },
   codeImage: {
-    resizeMode: "contain",
+    resizeMode: "stretch",
+    
     backgroundColor: globalStyles.highlightcolor1, //"#9EAAB4", #ABB8C3
-    width: "100%",
-    height: "auto",
-    minHeight: 250,
-    maxHeight: 450,
+    // width: "100%",
+    height: 250,
     borderRadius: 4,
   },
 });

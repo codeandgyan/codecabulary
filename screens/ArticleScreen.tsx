@@ -27,6 +27,7 @@ const ArticleScreen = () => {
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const slidesRef = useRef<any>();
+  console.log(status, isFetchingNextPage, isFetchingPreviousPage);
 
   useEffect(() => {
     setLoading(
@@ -79,6 +80,29 @@ const ArticleScreen = () => {
   };
 
   useEffect(() => {}, [screenSize.width, screenSize.height]);
+
+  if (status === "success" && articles?.length === 0) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          paddingTop: 40,
+          paddingHorizontal: 40,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 20,
+            color: globalStyles.textColor,
+            textAlign: "center",
+          }}
+        >
+          Oops, there are no articles at this time!
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <View
