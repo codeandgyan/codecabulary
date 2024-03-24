@@ -13,6 +13,7 @@ import SimpleCarouselItem from "./Carousel/SimpleCarouselItem";
 import Prettier from "../../assets/kb/Prettier.png";
 import LiveServer from "../../assets/kb/LiveServer.png";
 import ES7Snippets from "../../assets/kb/ES7Snippets.png";
+import GitStatus from "../../assets/kb/GitStatus.png";
 
 const content = [
   {
@@ -33,7 +34,12 @@ const content = [
     description: "This is carousel 3",
     img: ES7Snippets,
   },
-  // { page: 4, title: "Title 4", description: "This is carousel 4" },
+  {
+    page: 4,
+    title: "Title 4",
+    description: "This is carousel 4",
+    img: GitStatus,
+  },
   // { page: 5, title: "Title 5", description: "This is carousel 5" },
   // { page: 6, title: "Title 6", description: "This is carousel 6" },
   // { page: 7, title: "Title 7", description: "This is carousel 7" },
