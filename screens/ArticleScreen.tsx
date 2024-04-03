@@ -14,6 +14,7 @@ import useArticleContext from "../hooks/useArticleContext";
 import SingleArticle from "../components/Articles/SingleArticle";
 import Top10Article from "../components/Articles/Top10Article";
 import LogoImg from "../assets/codecabulary-white-transparent.png";
+import Codeminibytes from "../components/Articles/Codeminibytes";
 
 LogBox.ignoreLogs(["Warning: ..."]); //TODO: Temporarily Ignore log notification by message
 LogBox.ignoreAllLogs(); //TODO: Temporarily Ignore all log notifications
@@ -138,7 +139,14 @@ const ArticleScreen = () => {
         renderItem={({ item, index }) => {
           // return <SingleArticle item={item} index={index} scrollY={scrollY} parentScreenSize={screenSize} />;
           // return <SingleArticle article={item} screenSize={screenSize} />;
-          return <Top10Article article={item} screenSize={screenSize} />;
+          //return <Top10Article article={item} screenSize={screenSize} />;
+          return (
+            <Codeminibytes
+              article={item}
+              screenSize={screenSize}
+              index={index}
+            />
+          );
         }}
         ref={slidesRef}
         onEndReached={onEndReached}

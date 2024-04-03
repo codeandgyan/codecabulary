@@ -1,0 +1,78 @@
+// I am building a knowledge based tool that explains the software development concepts in short, concise yet in an impactful manner.
+// I want you to come-up with knowledge content basing your description on the content I prepared as example.
+// Here's a sample learning content that I have written that talks about a topic called "Terraform":
+
+// <what-section>
+// <heading>What is Terraform, and how does it work?
+// [0]: Terraform is an open-source innovation from HashiCorp that is changing infrastructure management.
+// [1]: It enables developers to use a high-level configuration language for infrastructure management, paving the way for quicker, automated deployments.
+// [2]: Infrastructure as Code (IaC) is more than an option; it's an essential requirement for flexible, modern development processes.
+
+// <how-section>
+// <heading>: How Terraform works?
+// [0]: Developers create configurations to define the desired infrastructure state, utilize planning to assess the effect of changes, and then apply to put those changes into action.
+// [1]: State files are critical for keeping track of the infrastructure's state and coordinating resource interconnections.
+// [2]: This careful procedure helps ensure that infrastructure improvements are both secure and predictable.
+// [3]: <analogy> Imagine a 3D printing process. You craft(code) the model of the desired object (infrastructure) and print(deploy) it exactly as you want.
+
+// <details-section>
+// <heading>: Key features:
+// [0]: Infrastructure as code — it shifts infrastructure management into the domain of code, promoting efficiency and enabling version control.
+// [1]: Execution plans — before any change takes effect, Terraform offers a preview, adding a layer of predictability.
+// [2]: Resource graph — this visual tool maps out dependencies between resources, guiding safe and coherent changes.
+// [3]: Change automation — by automating deployments, Terraform reduces the chance of human error.
+// [4]: These characteristics work together to create a development environment that prioritizes automation, consistency, and efficient infrastructure handling.
+
+// <appendix-section>
+// <heading>: Terraform vs other IaC tools:
+// [0]: Terraform's flexibility exceeds that of tools such as AWS CloudFormation, which is restricted to Amazon's environment, or Ansible, which focuses on configuration management.
+// [1]: It maintains many cloud services and infrastructure, providing a uniform, version-controlled overview of infrastructure across several platforms.
+// [2}: Terraform bridges the gap between development and operations, facilitating seamless infrastructure updates. It simplifies infrastructure management while increasing efficiency, predictability, and scalability.
+{
+  "topic": "Terraform",
+  "description": [
+    {
+      "heading": "What is Terraform?",
+      "bullet-points": [
+        "Terraform is an open-source innovation from HashiCorp that is changing infrastructure management.",
+        "It enables developers to use a high-level configuration language for infrastructure management, paving the way for quicker, automated deployments.",
+        "Infrastructure as Code (IaC) is more than an option; it's an essential requirement for flexible, modern development processes."
+      ]
+    },
+    {
+      "heading": "How Terraform works?",
+      "bullet-points": [
+        "Developers create configurations to define the desired infrastructure state, utilize planning to assess the effect of changes, and then apply to put those changes into action.",
+        "State files are critical for keeping track of the infrastructure's state and coordinating resource interconnections.",
+        "This careful procedure helps ensure that infrastructure improvements are both secure and predictable.",
+        "Imagine a 3D printing process. You craft(code) the model of the desired object (infrastructure) and print(deploy) it exactly as you want." //Should mandatorily contain an <analogy>
+      ]
+    },
+    {
+      "heading": "Key features include:",
+      "bullet-points": [
+        "Infrastructure as code — it shifts infrastructure management into the domain of code, promoting efficiency and enabling version control.",
+        "Execution plans — before any change takes effect, Terraform offers a preview, adding a layer of predictability.",
+        "Resource graph — this visual tool maps out dependencies between resources, guiding safe and coherent changes.",
+        "Change automation — by automating deployments, Terraform reduces the chance of human error.",
+        "These characteristics work together to create a development environment that prioritizes automation, consistency, and efficient infrastructure handling."
+      ]
+    },
+    {
+      "heading": "Terraform vs other IaC tools",
+      "bullet-points": [
+        "Terraform's flexibility exceeds that of tools such as AWS CloudFormation, which is restricted to Amazon's environment, or Ansible, which focuses on configuration management.",
+        "It maintains many cloud services and infrastructure, providing a uniform, version-controlled overview of infrastructure across several platforms.",
+        "Terraform bridges the gap between development and operations, facilitating seamless infrastructure updates. It simplifies infrastructure management while increasing efficiency, predictability, and scalability."
+      ]
+    }
+  ]
+}
+
+// The description should contain exactly 4 items in the JSON array (what, how, details, appendex)
+// Each item in the description should have 3 "bullet-points", with ocassionally 4 or 5 max.
+// Each bullet-point item should consist of maximum 20-22 words.
+// <analogy> should mandatorily appear as the last item under "what" section.
+// Each item in the <details-section>, except the last one should follow this template "<key pointer> — pointer description" just like "Infrastructure as code — it shifts infrastructure management into the domain of code, promoting efficiency and enabling version control."
+// Your responses should be printed in code-block.
+// The styling, language, structure of your explanations should comply to all these rules.

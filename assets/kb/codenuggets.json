@@ -1,0 +1,42 @@
+{
+  "codenuggets": [
+    {
+      "topic": "HTTP",
+      "reference": "https://simple.wikipedia.org/wiki/Hypertext_Transfer_Protocol",
+      "description": [
+        {
+          "heading": "What is HTTP?",
+          "bullet-points": [
+            "HTTP (Hypertext Transfer Protocol) is the foundation of communication on the World Wide Web.",
+            "It establishes rules for how data travels between browsers and web servers.",
+            "Imagine HTTP like a bank withdrawal form that you use to withdraw (request) cash (response) from the banker (server)."
+          ]
+        },
+        {
+          "heading": "How HTTP works?",
+          "bullet-points": [
+            "A client (browser) initiates a request by specifying an address (URL) and an action (GET, POST, etc.).",
+            "The server receives the request, processes it, and sends a response with data or an error message.",
+            "This back-and-forth exchange allows web pages, images, and other content to be delivered to your browser."
+          ]
+        },
+        {
+          "heading": "Key features of HTTP:",
+          "bullet-points": [
+            "Request-response cycle — Ensures organized communication between browsers and servers.",
+            "Stateless protocol — Each request is treated independently, promoting scalability.",
+            "Flexible methods (GET, POST, PUT, DELETE) — Define different actions on web resources.",
+            "Supports various content types — Enables transfer of text, images, videos, and more."
+          ]
+        },
+        {
+          "heading": "Beyond the basics:",
+          "bullet-points": [
+            "HTTP is the foundation for many web protocols like HTTPS (secure HTTP) and REST (architectural style).",
+            "Understanding HTTP is essential for building and interacting with web applications."
+          ]
+        }
+      ]
+    }
+  ]
+}
